@@ -18,7 +18,7 @@ from utils import clean_text
 chain: Chain = None
 portfolio: Portfolio = None
 
-PORTFOLIO_PATH = os.path.join(os.path.dirname(__file__), "resource", "my_portfolio.csv")
+PORTFOLIO_PATH = os.path.join(os.path.dirname(__file__), "resource", "portfolio_data.txt")
 
 
 @asynccontextmanager
@@ -99,13 +99,12 @@ async def generate_email(request: GenerateEmailRequest):
 @app.get("/api/portfolio", response_model=PortfolioResponse)
 async def get_portfolio():
     try:
-        import pandas as pd
-
-        df = pd.read_csv(PORTFOLIO_PATH)
-        entries = [
-            PortfolioEntry(techstack=row["Techstack"], link=row["Links"])
-            for _, row in df.iterrows()
-        ]
+        entries = []
+        if os.path.exists(PORTFOLIO_PATH):
+            with open(PORTFOLIO_PATH, "r", encoding="utf-8") as f:
+                content = f.read()
+            if content.strip():
+                entries.append(PortfolioEntry(techstack="Portfolio Document Loaded", link="Successfully parsed and indexed."))
         return PortfolioResponse(entries=entries)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -116,22 +115,35 @@ async def upload_portfolio(file: UploadFile = File(...)):
     global portfolio
     try:
         content = await file.read()
-        text = content.decode("utf-8")
+        filename = file.filename.lower()
+        extracted_text = ""
 
-        # Validate CSV format
-        reader = csv.DictReader(io.StringIO(text))
-        if "Techstack" not in reader.fieldnames or "Links" not in reader.fieldnames:
+        if filename.endswith(".pdf"):
+            import PyPDF2
+            pdf_reader = PyPDF2.PdfReader(io.BytesIO(content))
+            for page in pdf_reader.pages:
+                text = page.extract_text()
+                if text:
+                    extracted_text += text + "\n"
+        elif filename.endswith((".csv", ".txt")):
+            extracted_text = content.decode("utf-8")
+        else:
+            # Fallback to plain text decode
+            extracted_text = content.decode("utf-8", errors="ignore")
+
+        if not extracted_text.strip():
             raise HTTPException(
                 status_code=400,
-                detail="CSV must have 'Techstack' and 'Links' columns",
+                detail="Could not extract any text from the provided file.",
             )
 
-        # Save to disk
-        with open(PORTFOLIO_PATH, "w", encoding="utf-8", newline="") as f:
-            f.write(text)
+        # Save to disk as generic text
+        with open(PORTFOLIO_PATH, "w", encoding="utf-8") as f:
+            f.write(extracted_text)
 
-        # Reload portfolio
+        # Reload portfolio (this will re-chunk and store in ChromaDB)
         portfolio = Portfolio(file_path=PORTFOLIO_PATH)
+        portfolio.load_portfolio()
 
         # Return new entries
         return await get_portfolio()

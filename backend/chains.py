@@ -32,7 +32,7 @@ class Chain:
             raise OutputParserException("Context too big. Unable to parse jobs.")
         return res if isinstance(res, list) else [res]
 
-    def write_mail(self, job, links):
+    def write_mail(self, job, portfolio_context):
         prompt_email = PromptTemplate.from_template(
             """
             ### JOB DESCRIPTION:
@@ -45,7 +45,10 @@ class Chain:
             process optimization, cost reduction, and heightened overall efficiency. 
             Your job is to write a cold email to the client regarding the job mentioned above describing the capability of AtliQ 
             in fulfilling their needs.
-            Also add the most relevant ones from the following links to showcase Atliq's portfolio: {link_list}
+            Also use the following relevant context from AtliQ's portfolio to showcase AtliQ's capabilities: 
+            
+            {portfolio_context}
+            
             Remember you are Mohan, BDE at AtliQ. 
             Do not provide a preamble.
             ### EMAIL (NO PREAMBLE):
@@ -53,7 +56,7 @@ class Chain:
             """
         )
         chain_email = prompt_email | self.llm
-        res = chain_email.invoke({"job_description": str(job), "link_list": links})
+        res = chain_email.invoke({"job_description": str(job), "portfolio_context": "\n\n".join(portfolio_context)})
         return res.content
 
 if __name__ == "__main__":

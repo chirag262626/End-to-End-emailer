@@ -214,7 +214,7 @@ export default function Home() {
               <input
                 ref={fileInputRef}
                 type="file"
-                accept=".csv"
+                accept=".csv,.txt,.pdf"
                 onChange={handleUpload}
                 className="hidden"
                 id="portfolio-upload"
@@ -246,17 +246,12 @@ export default function Home() {
                     key={i}
                     className="flex items-center justify-between px-4 py-3 hover:bg-[var(--color-surface-light)] transition-colors"
                   >
-                    <span className="text-sm text-[var(--color-text)]">
+                    <span className="text-sm font-medium text-[var(--color-primary-light)]">
                       {entry.techstack}
                     </span>
-                    <a
-                      href={entry.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-[var(--color-primary-light)] hover:underline truncate max-w-[200px]"
-                    >
+                    <span className="text-xs text-[var(--color-text-dim)] truncate max-w-[250px]">
                       {entry.link}
-                    </a>
+                    </span>
                   </div>
                 ))}
               </div>
