@@ -1,0 +1,3 @@
+URL: https://cold-email-generator-xbdx.onrender.com
+Status: build_failed
+Final status: build_failed
