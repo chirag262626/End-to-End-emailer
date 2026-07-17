@@ -86,8 +86,8 @@ async def generate_email(request: GenerateEmailRequest):
         emails = []
         for job in jobs:
             skills = job.get("skills", [])
-            links = portfolio.query_links(skills)
-            email = chain.write_mail(job, links)
+            portfolio_context = portfolio.query_portfolio(skills)
+            email = chain.write_mail(job, portfolio_context)
             emails.append(email)
 
         return GenerateEmailResponse(emails=emails, jobs=jobs)
