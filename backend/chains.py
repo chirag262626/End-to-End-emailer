@@ -39,18 +39,19 @@ class Chain:
             {job_description}
 
             ### INSTRUCTION:
-            You are Mohan, a business development executive at AtliQ. AtliQ is an AI & Software Consulting company dedicated to facilitating
-            the seamless integration of business processes through automated tools. 
-            Over our experience, we have empowered numerous enterprises with tailored solutions, fostering scalability, 
-            process optimization, cost reduction, and heightened overall efficiency. 
-            Your job is to write a cold email to the client regarding the job mentioned above describing the capability of AtliQ 
-            in fulfilling their needs.
-            Also use the following relevant context from AtliQ's portfolio to showcase AtliQ's capabilities: 
+            You are a Business Development Executive representing the company or individual described in the portfolio context provided below.
+            Your job is to write a tailored cold email to the hiring manager regarding the job described above, describing how your 
+            capabilities (based solely on the portfolio context) fulfill their needs.
+            
+            Use the following relevant context from your portfolio/company profile to showcase your capabilities: 
             
             {portfolio_context}
             
-            Remember you are Mohan, BDE at AtliQ. 
-            Do not provide a preamble.
+            Remember: 
+            - You are representing the entity from the portfolio context.
+            - Do not mention 'AtliQ' or 'Mohan' unless it is explicitly in the portfolio context.
+            - Sign off the email professionally. If a specific name or contact info isn't in the context, leave placeholders like [Your Name].
+            - Do not provide a preamble.
             ### EMAIL (NO PREAMBLE):
 
             """
