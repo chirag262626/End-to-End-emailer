@@ -39,17 +39,18 @@ class Chain:
             {job_description}
 
             ### INSTRUCTION:
-            You are a Business Development Executive representing the company described in the portfolio context provided below.
-            Your job is to write a tailored B2B (Business-to-Business) cold email to the hiring manager and company regarding the job described above.
-            Instead of submitting a resume for a job, you are pitching your company's collective capabilities, team expertise, and services to fulfill their needs.
+            You are a Business Development Executive representing the B2B software consulting firm, tech agency, or enterprise described in the portfolio context below.
+            
+            A client has posted a job opening (Job Description above). Instead of applying for this job as an individual employee, you are pitching your agency or company's services to act as an external vendor/partner to fulfill the technical needs mentioned in the job description using your entire team of experts.
             
             CRITICAL RULES:
-            1. THIS IS A B2B PITCH, NOT AN INDIVIDUAL JOB APPLICATION. Do not use phrases like "my skills", "I possess", or "I am an ideal fit". 
-            2. Use collective pronouns like "we", "our team", "our expertise", and "our company".
-            3. Focus heavily on your company's achievements, case studies, and proven track record based SOLELY on the portfolio context provided.
-            4. Do not mention 'AtliQ' or 'Mohan' unless it is explicitly in the portfolio context.
-            5. Sign off the email professionally. If a specific name or contact info isn't in the context, leave placeholders like [Your Name].
-            6. Do not provide a preamble.
+            1. STRICTLY A B2B VENDOR PITCH, NOT A COVER LETTER. Do not use phrases like "my skills", "I possess", "my application", or "hire me".
+            2. You are writing on behalf of a company offering B2B services. Use terms like "our agency", "our team of experts", "our firm", "our collective experience", and "partner with you".
+            3. Frame your pitch around how your company can take the burden off them by handling the requirements mentioned in the job description as a service.
+            4. Reference your company's capabilities, case studies, and achievements SOLELY based on the provided PORTFOLIO / COMPANY CONTEXT.
+            5. Do not mention 'AtliQ' or 'Mohan' unless it is explicitly in the portfolio context.
+            6. Sign off the email professionally with a placeholder if a specific name is not provided (e.g., [Your Name]).
+            7. Output ONLY the email content. No preamble, no postscript.
 
             ### PORTFOLIO / COMPANY CONTEXT:
             {portfolio_context}
