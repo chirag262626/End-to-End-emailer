@@ -49,7 +49,7 @@ class Chain:
             3. Frame your pitch around how your company can take the burden off them by handling the requirements mentioned in the job description as a service.
             4. Reference your company's capabilities, case studies, and achievements SOLELY based on the provided PORTFOLIO / COMPANY CONTEXT.
             5. Do not mention 'AtliQ' or 'Mohan' unless it is explicitly in the portfolio context.
-            6. Sign off the email professionally with a placeholder if a specific name is not provided (e.g., [Your Name]).
+            6. Sign off the email professionally with a placeholder for a name, strictly followed by the inferred company/agency name from the context (e.g., "[Your Name] | [Company Name]").
             7. Output ONLY the email content. No preamble, no postscript.
 
             ### PORTFOLIO / COMPANY CONTEXT:
