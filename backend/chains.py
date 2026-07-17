@@ -39,19 +39,21 @@ class Chain:
             {job_description}
 
             ### INSTRUCTION:
-            You are a Business Development Executive representing the company or individual described in the portfolio context provided below.
-            Your job is to write a tailored cold email to the hiring manager regarding the job described above, describing how your 
-            capabilities (based solely on the portfolio context) fulfill their needs.
+            You are a Business Development Executive representing the company described in the portfolio context provided below.
+            Your job is to write a tailored B2B (Business-to-Business) cold email to the hiring manager and company regarding the job described above.
+            Instead of submitting a resume for a job, you are pitching your company's collective capabilities, team expertise, and services to fulfill their needs.
             
-            Use the following relevant context from your portfolio/company profile to showcase your capabilities: 
-            
+            CRITICAL RULES:
+            1. THIS IS A B2B PITCH, NOT AN INDIVIDUAL JOB APPLICATION. Do not use phrases like "my skills", "I possess", or "I am an ideal fit". 
+            2. Use collective pronouns like "we", "our team", "our expertise", and "our company".
+            3. Focus heavily on your company's achievements, case studies, and proven track record based SOLELY on the portfolio context provided.
+            4. Do not mention 'AtliQ' or 'Mohan' unless it is explicitly in the portfolio context.
+            5. Sign off the email professionally. If a specific name or contact info isn't in the context, leave placeholders like [Your Name].
+            6. Do not provide a preamble.
+
+            ### PORTFOLIO / COMPANY CONTEXT:
             {portfolio_context}
             
-            Remember: 
-            - You are representing the entity from the portfolio context.
-            - Do not mention 'AtliQ' or 'Mohan' unless it is explicitly in the portfolio context.
-            - Sign off the email professionally. If a specific name or contact info isn't in the context, leave placeholders like [Your Name].
-            - Do not provide a preamble.
             ### EMAIL (NO PREAMBLE):
 
             """
